@@ -21,6 +21,18 @@ app.get("/api/drivers", (req, res) => {
   });
 });
 
+app.get("/api/constructors", (req, res) => {
+  const query = "select * from constructor";
+  connection.query(query, (err, rows) => {
+    if (err) throw err;
+    const retVal = {
+      data: rows,
+      message: rows.length === 0 ? "No Records Found" : "Success",
+    };
+    return res.send(retVal);
+  });
+});
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log("App is running");
